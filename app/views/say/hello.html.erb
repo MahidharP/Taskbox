@@ -1,0 +1,18 @@
+<% movies = {"Uturn" => ["Veeresh, PVR", 120, 8.4], "Kabali" => ["Inox, Lido", 144, 9.2], "Sultan" => ["Inox, PVR", 132, 9.8] } %>
+
+<h2> Now showing </h2>
+
+<ol> 
+	<% movies.each do |movie, details| %>
+		<li><%= movie %> </li>
+			<ol>
+				<li> Theatres: <%= details[0] %> </li>
+				<li> Duration: <%= details[1] %> Minutes </li>
+				<li> Rating  : <%= details[2] %> </li>
+			</ol>
+	<% end %>
+</ol>
+
+<a href="/say/goodbye">GoodBye</a> 
+
+<br><%= link_to "say products", say_products_path %><br>

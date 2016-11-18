@@ -1,0 +1,26 @@
+<h1>Listing Products: <%= @product.size %> </h1>
+
+<table border="10">
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Unit</th>
+		<th>In_Stock</th>
+		<th>Available_from</th>
+		<th>category</th>
+	</tr>
+</thead>
+
+<% @product.each do |prod| %>
+<tr>
+	<td><%= prod.name %></td>
+	<td><%= prod.price %></td>
+	<td><%= prod.unit %></td>
+	<td><%= prod.in_stock %></td>
+	<td><%= prod.available_from.strftime("%A, %d %B %y") %></td>
+	<td><%= Category1.find(prod.name).name %></td>
+</tr>
+<% end %>
+<tbody>
+</tbody>

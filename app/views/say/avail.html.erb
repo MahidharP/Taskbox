@@ -1,0 +1,10 @@
+<h3>The products available in stock are </h3>
+<% @product1.each do |pro| %>
+<% if  pro.in_stock == true %>
+
+<tr>
+	<td><%= pro.name %></td>
+	<td><%= pro.in_stock %></td>
+	<%end %>
+	<%end %>
+</tr>

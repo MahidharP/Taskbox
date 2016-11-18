@@ -1,0 +1,15 @@
+<h1>GoodBye World</h1>
+<h3>The products available in stock are </h3>
+<% @product1.each do |pro| %>
+<% if  pro.in_stock == true %>
+
+<tr>
+	<td><%= pro.name %></td>
+	<td><%= pro.in_stock %></td>
+	<%end %>
+	<%end %>
+</tr>
+
+<a href="/say/hello">Hello</a>
+
+<br><%= link_to "say products", say_products_path %><br>

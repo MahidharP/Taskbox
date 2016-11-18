@@ -1,0 +1,9 @@
+<h1>Listing Products: <%= @products.size %> </h1>
+
+<ol>
+	<% @products.each do |product| %> 
+		<li><%=product%></li>
+	<% end %>
+</ol>
+
+<%= link_to "Hello", say_hello_path %>

@@ -1,0 +1,15 @@
+<h2>List of Categories </h2>
+<h4>Total: <%= @category1.size %> </h4> 	
+<table border ="2">
+<thread>
+	<tr> 
+		<th>Name</th>
+	</tr>
+</thread>
+<% @category1.each do |cat| %>
+<tr>
+<td><%= cat.name %></td>
+</tr>
+<% end %
+>
+</table>

@@ -1,0 +1,85 @@
+<h1>Listing Products: <%= @product1.size %> </h1>
+<table border="10">
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Unit</th>
+		<th>In_Stock</th>
+		<th>Available_from</th>
+		<th>category</th>
+	</tr>
+</thead>
+
+<% @product1.each do |prod| %>
+<tr>
+	<td><%= prod.name %></td>
+	<td><%= prod.price %></td>
+	<td><%= prod.unit %></td>
+	<td><%= prod.in_stock %></td>
+	<td><%= prod.available_from.strftime("%A, %d %B %y") %></td>
+	<td><%= Category1.find(prod.category).name %></td>
+</tr>
+<% end %>
+<tbody>
+</tbody>
+</table>
+
+<h3> Totol Units available are:-  </h3>
+<% count = 0 %>
+<% @product1.each do |produ| %>
+<% count = count + produ.unit.to_i %>
+<%end %>
+<%= count %>
+
+<h3>The products available in stock are </h3>
+<table border = "8">
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Unit</th>
+		<th>In_Stock</th>
+		<th>Available_from</th>
+		<th>category</th>
+	</tr>
+</thead>
+<% @in_stock_products.each do |pro| %>
+
+<tr>
+	<td><%= pro.name %></td>
+	<td><%= pro.price %></td>
+	<td><%= pro.unit %></td>
+	<td><%= pro.in_stock %></td>
+	<td><%= pro.available_from %></td>
+	<td><%= pro.category %></td>
+	<%end %>
+</tr>
+</table>
+
+<h3>The products out of stock are </h3>
+<table border ="8">
+<thread>
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Unit</th>
+		<th>In_Stock</th>
+		<th>Available_from</th>
+		<th>category</th>
+	</tr>
+</thead>
+
+<% @product1.each do |pr| %>
+	<% unless pr.in_stock %>
+<tr>
+	<td><%= pr.name %></td>
+	<td><%= pr.price %></td>
+	<td><%= pr.unit %></td>
+	<td><%= pr.in_stock %></td>
+	<td><%= pr.available_from %></td>
+	<td><%= pr.category %></td>
+	<% end %>
+	<% end %>
+</tr>
+</table>	

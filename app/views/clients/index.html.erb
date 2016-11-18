@@ -1,0 +1,79 @@
+<div class = "row">
+	<div class = "col-md-9">
+
+		<div class="page-header">
+			<h2>Listing Clients </h2>
+		</div>
+		<%= link_to clients_path(format: "xls"), class: "btn btn-info btn-sm pull-right" do %>
+		<span class = "glyphicon glyphicon-download-alt"></span> Export to Excel
+		<% end %>
+		<script>
+			$(document).ready(function(){
+				$('#myTable').DataTable();
+			});
+		</script>			
+
+		<% if @clients.empty? %>
+		<p>NO Clients found </p>
+		<% else %>
+		<table class="table table-striped " id="myTable">
+			<thread>
+				<tr>
+					<th>Sl.no</th>
+					<th>Name</th>
+					<th>Company</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<% if current_user.is_admin? %>
+					<th>User</th>
+					<% end %>
+					<th>Actions</th>
+					<th>No. Of projects</th>
+				</tr>
+			</thread>
+			<tbody>
+				<% @clients.each_with_index do |client,index| %>
+				<tr>
+					<td><%= index + 1 %></td>
+					<td><%= link_to client.name, client_path(client.id) %></td>
+					<td><%= client.company.capitalize %></td>
+					<td><%= client.mobile %></td>
+					<td><%= client.email %></td>
+					<% if current_user.is_admin? %>
+					<td><%= client.user.email %></td>
+					<% end %>
+					<td><%= link_to client_path(client.id) do %>
+						<span class = "glyphicon glyphicon-eye-open"></span>
+						<% end %></td>
+						<td><%= (client.projects).count %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<% end %>
+			<% if can? :create, Client.new %> 
+			<%= link_to "Add Client", new_client_path, class:"btn btn-info" %>
+			<%end %>
+			<% if can? :create, Project.new %>
+			<h3>To Add Project to client </h3>
+			<%= link_to "Add Project", new_project_path, class:"btn btn-info" %>
+			<%end %>
+			<h3>Goto Projects</h3>
+			<%= link_to "Projects", projects_path, class:"btn btn-info" %>
+		</div>
+
+		<div class = "col-md-3">
+			<div class = "page-header">
+				<h2>Stats</h2>
+			</div>
+			<% data = {}
+			current_user.clients.each do |client|
+				data[client.name] = client.projects.count
+			end 
+			%>
+			<%= data %>
+			<%= pie_chart(data) %>
+			<%= column_chart(data) %>
+			<%= bar_chart(data) %>
+		</div>
+	</div>

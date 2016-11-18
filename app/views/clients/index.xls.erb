@@ -1,0 +1,28 @@
+<h3>My Clients </h3>
+
+<table class= "table table-stripped">
+	<thread>
+		<tr>
+			<th>Sl.no</th>
+			<th>Name</th>
+			<th>Company</th>
+			<th>Mobile</th>
+			<th>Email</th>
+			<th>Actions</th>
+			<th>No. Of projects</th>
+		</tr>
+	</thread>
+	<tbody>
+		<% @clients.each_with_index do |client,index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= link_to client.name, client_url(client.id) %></td>
+				<td><%= client.company.capitalize %></td>
+				<td><%= client.mobile %></td>
+				<td><%= client.email %></td>
+				<td><%= link_to "Show", client_path(client.id) %>
+				<td><%= (client.projects).count %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>

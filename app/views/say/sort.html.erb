@@ -1,0 +1,9 @@
+<% category = Category1.all %>
+<h3> Product based on category </h3>
+<% category.each do |cat| %>
+<% product1 = Product1.where('Category_id = ?', cat).name %>
+<% @product1.each do |prod1| %>
+<td><%= prod1.name %></t
+
+
+

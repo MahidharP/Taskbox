@@ -1,0 +1,60 @@
+<h1> Total Tasks : <%= @task.size %> </h1>
+
+ 
+<% Project.all.each do |project| %>
+	<h3><%=project.details %></h3>
+	<% if project.tasks.empty? %>
+		<p> No tasks found </p>
+	<% else %>
+	<h4>Total Tasks : <%= project.tasks.size %></h4>
+	<ul>
+	<% project.tasks.each do |task| %>
+	<li><% if task.is_complete %>
+	<s><%= task.title %></li></s>
+	<%else %>
+	<%= task.title %>
+	<%end %>
+	<% end %>
+	</ul>
+	<% end %>
+	<hr/>
+	<% end %>
+<table border= "10">
+	<thread>
+		<tr>
+			<th>Title</th>
+			<th>Project_id</th>
+			<th>Due_date</th>
+			<th>Is_completed</th>
+		</tr>
+	</thread>
+	<tbody>
+		<% @task.each_with_index do |task,index| %>
+			<tr>
+				<td><%= task.title.capitalize %></td>
+				<td><%= task.project_id %></td>
+				<td><%= task.due_date %></td>
+				<td><%= task.is_complete %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<hr/>
+
+<h3>Completed Tasks</h3>
+<ul>
+	<% @complete_task.each do |task| %>
+	<li><%= task.title %></li>
+	<%end %>
+<h3> Incomplete tasks </h3>
+<ul>
+	<% @incomplete_task.each do |task| %>
+	<li><%= task.title %></li>
+	<% end %>
+</ul>
+<h3>Over due Tasks</h3>
+<ul>
+	<% @over_due_task.each do |task| %>
+	<li><%= task.title %></li>
+	<% end %>
+</ul>	
