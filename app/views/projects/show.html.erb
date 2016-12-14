@@ -2,20 +2,26 @@
 
 <%= link_to "Export to Excel", projects_path(@project.id, format: "xls") %>
 
-<p> <%= @project.description %> <%= @project.status %><br/> Assigned to <%= link_to @project.client.name, client_path(@project.client_id) %></p>
+<p>
+	<%= @project.description %>
+	<%= @project.status %><br/>
+	Assigned to
+	<%= link_to @project.client.name, client_path(@project.client_id) %></p>
 <%= link_to "edit", edit_project_path(@project.id) %>
 <%= link_to "destroy", project_path(@project.id), data: {method: :delete, confirm: "Are you Sure?" } %>
-(<%=@project.categories.pluck(:name).join(", ") %>) 
+(<%=@project.categories.pluck(:name).join(", ") %>)
 
 <% if @project.tasks.empty? %>
-	No Tasks Found 
+No Tasks Found
 <% else %>
-	<h3> Total Tasks : <%= @project.tasks.size %></h3>
-	<ul>
-		<% for task in @project.tasks %>
-			<li><%= task.title %></li>
-		<% end %>
-	</ul>
+<h3>
+	Total Tasks :
+	<%= @project.tasks.size %></h3>
+<ul>
+	<% for task in @project.tasks %>
+	<li><%= task.title %></li>
+	<% end %>
+</ul>
 <% end %>
 
 <h3>Add Task</h3>
@@ -27,7 +33,8 @@
 <label>Due Date</label><br/>
 <%= f.date_select :due_date, order:[:day,:month,:year] %><br/>
 
-<%= f.check_box :is_complete %><label>Is Completed</label><br/>
+<%= f.check_box :is_complete %>
+<label>Is Completed</label><br/>
 
 <%= f.submit %>
 
@@ -35,16 +42,17 @@
 
 <h3>Completed Tasks</h3>
 <% @project.iscomplete_tasks.each do |task| %>
-<%= task.title %> 
+<%= task.title %>
 <%= link_to "Mark_as_incomplete", tasks_mark_as_incomplete_path(task_id: task.id) %>
 
 <% end %>
 
 <h3>In Completed Tasks</h3>
 <% @project.isincomplete_tasks.each do |task| %>
-	<%= task.title %> -
-	<%= link_to "mark as complete", tasks_mark_as_complete_path(task_id: task.id) %>
-	<% end %>
+<%= task.title %>
+-
+<%= link_to "mark as complete", tasks_mark_as_complete_path(task_id: task.id) %>
+<% end %>
 <%= link_to "Home", projects_path %>
 
 <% data = {}

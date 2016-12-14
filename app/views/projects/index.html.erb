@@ -1,72 +1,72 @@
-<div class = "row" >
-	<div class = "col-md-8" >
-		<div class = "page-header" >
-			<h2>Listing Projects </h2>
+<div class="row">
+	<div class="col-md-8">
+		<div class="page-header">
+			<h2>Listing Projects
+			</h2>
 		</div>
 
-		<b>Filter by: 
-			<%= link_to "New", projects_path(status: "New") %> |
+		<b>Filter by:
+			<%= link_to "New", projects_path(status: "New") %>
+			|
 			<%= link_to "On-Going", projects_path(status: "On-Going") %>|
 			<%= link_to "Completed", projects_path(status: "Completed") %>|
 			<%= link_to "All", projects_path %>
 		</b>
 		<br/>
 		<% if @projects.empty? %>
-			<p>NO Projects found </p>
-		<% else %>
-			<table class = "table table-stripped">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Client</th>
-						<th>Description</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-						<th>Status</th>
-						<th>Budget</th>
-						<th>Actions</th>
+		<p>NO Projects found
+		</p>
+	<% else %>
+		<table class="table table-stripped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Client</th>
+					<th>Description</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Status</th>
+					<th>Budget</th>
+					<th>Actions</th>
 
-					</tr>
-				</thead>
-				<% @projects.each do |project| %>
-						<tr>
-							<td><%= project.name %></td>
-							<td><%= project.client.nil? ? "N/A" : project.client.name  %></td>
-							<td><%= project.description %></td>
-							<td><%= project.start_date.strftime("%A, %d %B %y") %></td>
-							<td><%= project.end_date.strftime("%A, %d %B %y") %></td>
-							<td><%= project.status %></td>
-							<td><%= project.budget %></td>
-							<td><%= link_to "Show", project_path(project.id) %></td>
-						</tr>
-				<%end %>
-			</table>
+				</tr>
+			</thead>
+			<% @projects.each do |project| %>
+			<tr>
+				<td><%= project.name %></td>
+				<td><%= project.client.nil? ? "N/A" : project.client.name  %></td>
+				<td><%= project.description %></td>
+				<td><%= project.start_date.strftime("%A, %d %B %y") %></td>
+				<td><%= project.end_date.strftime("%A, %d %B %y") %></td>
+				<td><%= project.status %></td>
+				<td><%= project.budget %></td>
+				<td><%= link_to "Show", project_path(project.id) %></td>
+			</tr>
+			<%end %>
+		</table>
 		<% end %>
 
-
-	<%= link_to "Add Project", new_project_path, class:"btn btn-info" %>
-	<h3>Add Client </h3>
-	<%= link_to "Add Client", new_client_path, class:"btn btn-info" %>
-	<%= link_to "Client", clients_path, class:"btn btn-info" %>
-	</div>	
-	<div class = "col-md-4" >
-	<% data = {}
+		<%= link_to "Add Project", new_project_path, class:"btn btn-info" %>
+		<h3>Add Client
+		</h3>
+		<%= link_to "Add Client", new_client_path, class:"btn btn-info" %>
+		<%= link_to "Client", clients_path, class:"btn btn-info" %>
+	</div>
+	<div class="col-md-4">
+		<% data = {}
 	data["new"] = @projects.where('status = ?', "New").count
 	data["on-going"] = @projects.where('status = ?', "On-Going").count
 	data["completed"] = @projects.where('status = ?', "Completed").count
 	%>
-<%= pie_chart(data) %>
+		<%= pie_chart(data) %>
 
-<% data = {} 
-	@projects.each do |project| 
+		<% data = {}
+	@projects.each do |project|
 	data[project.name] = project.tasks.count
-end 
+end
 	%>
-	<%= data %>
-	<%= column_chart(data) %>
- </div>
+		<%= data %>
+		<%= column_chart(data) %>
+	</div>
 
- </div>
-
-
-	
+</div>

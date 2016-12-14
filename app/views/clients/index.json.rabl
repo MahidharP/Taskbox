@@ -1,2 +1,2 @@
 collection @clients
-extends "clients/show"
+extends 'clients/show'

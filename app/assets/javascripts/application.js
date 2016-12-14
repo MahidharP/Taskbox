@@ -15,3 +15,10 @@
 //= require turbolinks
 //= require chartkick
 //= require_tree .
+
+$(document).ready(function() {
+    $("#projectsTable").DataTable({
+
+    });
+    $("#project_client_id").chosen();
+})
