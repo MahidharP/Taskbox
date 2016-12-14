@@ -75,9 +75,34 @@
 				data[client.name] = client.projects.count
 			end
 			%>
-		<%= data %>
-		<%= pie_chart(data) %>
-		<%= column_chart(data) %>
-		<%= bar_chart(data) %>
+		<% data %>
+
+		<div>
+
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#pie" aria-controls="pie" role="tab" data-toggle="tab">Pie</a>
+				</li>
+				<li role="presentation">
+					<a href="#bar" aria-controls="bar" role="tab" data-toggle="tab">column</a>
+				</li>
+				<li role="presentation">
+					<a href="#column" aria-controls="column" role="tab" data-toggle="tab">bar</a>
+				</li>
+
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="pie"><%= pie_chart(data) %></div>
+				<div role="tabpanel" class="tab-pane" id="bar">
+					<%= column_chart(data) %></div>
+				<div role="tabpanel" class="tab-pane" id="column"><%= bar_chart(data) %></div>
+
+			</div>
+
+		</div>
+
 	</div>
 </div>
